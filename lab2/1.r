@@ -14,5 +14,5 @@ colors <- c("pink", "red", rgb(0.112, 0.012, 0.012), rgb(0.247, 0.011, 0.011),
 
 
 par(mfrow=c(1, 2))
-barplot(means, col=colors, names=berrys, main="Средние оценки/Рейтинг")
-hist(means, main="Встречаемость оценок")
+barplot(means, col=colors, names=berrys, main="Средние оценки/Рейтинг", ylab="Рейтинг")
+hist(means, main="Встречаемость оценок", xlab="Оценки", ylab="Кол-во раз встретились")
