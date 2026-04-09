@@ -30,6 +30,6 @@ buildPlot(ukraine_data, 2014:2026, "Украина")
 
 plot(2014, xaxt = "n", yaxt = "n", xlab='', ylab='')
 legend("top", legend = names(georgia_data)[c(-1, -2)],
-       cex = 1.2,
+       cex = 1,
        fill=c("red", "green", "orange", "pink", 'purple', 'yellow', 'brown', 'blue', rgb(0.100, 0.50, 0.70)))
 par(mfrow = c(1, 1))
