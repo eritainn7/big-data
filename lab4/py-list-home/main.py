@@ -2,6 +2,7 @@ from selenium import webdriver
 from bs4 import BeautifulSoup
 from Apartment import Apartment
 from selenium.webdriver.firefox.options import Options
+from ApartmentCharactes import ApartmentCharacters
 
 options = Options()
 options.add_argument("--headless")
@@ -17,6 +18,14 @@ soup = BeautifulSoup(html_source, 'html.parser')
 apartments = soup.find('div', {'class': 'x31de4314--_5d947--wrapper'})
 list_apartments = apartments.find_all('article')
 
+DATA_APARTS = []
 for aprt in list_apartments:
-    print(Apartment(aprt).getLink())
+    entity_aprt = Apartment(aprt)
+    dict_chrcts = ApartmentCharacters(entity_aprt.getLink(), driver).getCharcters()
+
+    DATA_APARTS.append({
+        "apartment": entity_aprt,
+        "characters": dict_chrcts
+    })
+    
 driver.quit()
