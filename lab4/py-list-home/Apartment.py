@@ -28,9 +28,6 @@ class Apartment:
     def getDescription(self):
         return self.__description
 
-    def getCharacters(self):
-        pass
-
     def getAddress(self):
         return self.__address
 
