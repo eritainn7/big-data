@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 from Apartment import Apartment
 from selenium.webdriver.firefox.options import Options
 from ApartmentCharactes import ApartmentCharacters
+from ApartmentCSV import ApartmentCSV
 
 options = Options()
 options.add_argument("--headless")
@@ -19,13 +20,21 @@ apartments = soup.find('div', {'class': 'x31de4314--_5d947--wrapper'})
 list_apartments = apartments.find_all('article')
 
 DATA_APARTS = []
+CHRCTRS_APARTS = []
 for aprt in list_apartments:
     entity_aprt = Apartment(aprt)
     dict_chrcts = ApartmentCharacters(entity_aprt.getLink(), driver).getCharcters()
 
-    DATA_APARTS.append({
-        "apartment": entity_aprt,
-        "characters": dict_chrcts
-    })
-    
+    data_apart = {
+        "link": entity_aprt.getLink(),
+        "description": entity_aprt.getDescription(),
+        "address": entity_aprt.getAddress(),
+        "cost": entity_aprt.getCost(),
+    }
+    CHRCTRS_APARTS.append(dict_chrcts)
+    DATA_APARTS.append(data_apart)
+
+ApartmentCSV(DATA_APARTS).saveToCSV(filename="main_data")
+for i, chrctr in enumerate(CHRCTRS_APARTS):
+    ApartmentCSV([chrctr]).saveToCSV(filename=f'apartment_{i}')
 driver.quit()
